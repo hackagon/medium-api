@@ -2,7 +2,7 @@ import { Injectable, Body, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { UserRepository } from "./user.repository";
 import { User } from "./user.entity";
-import { UserDTO, Credentials } from "./interface";
+import { UserDTO } from "./interface";
 
 @Injectable()
 export class UserService {

@@ -5,7 +5,7 @@ export interface User extends UserDTO {
   fullName: string;
 }
 
-export interface UserDTO {
+export class UserDTO {
   email: string;
   password: string;
   fullName: string;
