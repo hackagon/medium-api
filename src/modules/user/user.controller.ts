@@ -1,7 +1,7 @@
 import { Controller, Get, Query, Delete, Param, ParseIntPipe, Post, Body, Patch } from "@nestjs/common";
 import { User } from "./user.entity";
 import { UserService } from "./user.service";
-import { CreateUserDTO, UpdateUserDTO } from "./interface";
+import { CreateUserDTO, UpdateUserDTO, ReplaceUserDTO } from "./user.dto";
 
 @Controller("users")
 export class UserController {
@@ -21,6 +21,11 @@ export class UserController {
 
   @Patch(":id")
   updateUser(@Param("id") id: number, @Body() userDTO: Partial<UpdateUserDTO>): Promise<User> {
+    return this.userService.updateUserById(id, userDTO);
+  }
+
+  @Patch(":id")
+  replaceUser(@Param("id") id: number, @Body() userDTO: Partial<ReplaceUserDTO>): Promise<User> {
     return this.userService.updateUserById(id, userDTO);
   }
 

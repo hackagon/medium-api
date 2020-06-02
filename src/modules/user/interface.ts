@@ -1,26 +1,5 @@
-import { IsEmail, IsNotEmpty, Matches } from "class-validator";
+import { CreateUserDTO } from "./user.dto";
 
-// DTO
-export class CreateUserDTO {
-  @IsNotEmpty()
-  @IsEmail()
-  email: string;
-
-  @IsNotEmpty()
-  password: string;
-
-  @IsNotEmpty()
-  @Matches(this.password, { message: "Confirm password should match password" })
-  password2: string;
-
-  @IsNotEmpty()
-  fullName: string;
-}
-
-export class UpdateUserDTO {
-  @IsNotEmpty()
-  fullName: string;
-}
 
 // interface
 export interface User extends CreateUserDTO {

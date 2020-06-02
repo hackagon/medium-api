@@ -4,11 +4,13 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config/typeorm.config';
 import { UserModule } from './modules/user/user.module';
+import { ValidatorModule } from './decorator/validator.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
-    UserModule
+    UserModule,
+    ValidatorModule
   ],
   controllers: [AppController],
   providers: [AppService],

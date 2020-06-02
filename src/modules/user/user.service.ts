@@ -1,8 +1,8 @@
-import { Injectable, Body, NotFoundException } from "@nestjs/common";
+import { Injectable, Body, NotFoundException, BadRequestException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { UserRepository } from "./user.repository";
 import { User } from "./user.entity";
-import { CreateUserDTO, UpdateUserDTO } from "./interface";
+import { CreateUserDTO, UpdateUserDTO, ReplaceUserDTO } from "./user.dto";
 import _ from "lodash";
 
 @Injectable()
@@ -23,6 +23,9 @@ export class UserService {
   }
 
   async createUser(@Body() userDTO: CreateUserDTO): Promise<User> {
+    const foundUser = await this.userRepository.findOne({ email: userDTO.email });
+    if (foundUser) throw new BadRequestException("Email exist");
+
     const newUser = this.userRepository.create(userDTO);
     return await newUser.save();
   }
@@ -36,7 +39,7 @@ export class UserService {
     return foundUser;
   }
 
-  async replaceUserById(id: number, userDTO: UpdateUserDTO): Promise<User> {
+  async replaceUserById(id: number, userDTO: ReplaceUserDTO): Promise<User> {
     let foundUser = await this.getUserById(id);
     _.chain(userDTO)
       .keys()

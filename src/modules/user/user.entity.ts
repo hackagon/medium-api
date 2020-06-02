@@ -1,5 +1,4 @@
 import { Entity, BaseEntity, PrimaryColumn, PrimaryGeneratedColumn, Column } from "typeorm";
-import { NotImplementedException } from "@nestjs/common";
 
 @Entity()
 export class User extends BaseEntity {
@@ -7,11 +6,13 @@ export class User extends BaseEntity {
   id: number;
 
   @Column({
+    name: "email",
     nullable: false
   })
   email: string;
 
   @Column({
+    name: "password",
     nullable: false
   })
   password: string;
