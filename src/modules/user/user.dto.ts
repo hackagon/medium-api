@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty, Validate } from "class-validator";
-import { isMatch } from "src/decorator/isMatch.decorator";
+import { IsMatch } from "src/decorator/IsMatch.decorator";
 import { IsUniqueEmail } from "src/decorator/isUnique.decorator";
 
 // Create
@@ -12,8 +12,7 @@ export class CreateUserDTO {
   @IsNotEmpty()
   password: string;
 
-  @IsNotEmpty()
-  @isMatch("password", { message: "Confirm password should match" })
+  @IsMatch("password", { message: "Confirm password should match" })
   password2: string;
 
   @IsNotEmpty()

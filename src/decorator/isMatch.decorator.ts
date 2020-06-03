@@ -1,6 +1,6 @@
 import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 
-export function isMatch(property: string, validationOptions?: ValidationOptions) {
+export function IsMatch(property: string, validationOptions?: ValidationOptions) {
   return (object: any, propertyName: string) => {
     registerDecorator({
       target: object.constructor,
@@ -12,7 +12,7 @@ export function isMatch(property: string, validationOptions?: ValidationOptions)
   };
 }
 
-@ValidatorConstraint({ name: 'isMatch' })
+@ValidatorConstraint({ name: 'IsMatch' })
 export class MatchConstraint implements ValidatorConstraintInterface {
 
   validate(value: any, args: ValidationArguments) {

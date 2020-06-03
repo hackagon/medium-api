@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Delete, Param, ParseIntPipe, Post, Body, Patch } from "@nestjs/common";
+import { Controller, Get, Query, Delete, Param, ParseIntPipe, Post, Body, Patch, Put, UseInterceptors, ClassSerializerInterceptor } from "@nestjs/common";
 import { User } from "./user.entity";
 import { UserService } from "./user.service";
 import { CreateUserDTO, UpdateUserDTO, ReplaceUserDTO } from "./user.dto";
@@ -9,28 +9,39 @@ export class UserController {
     private userService: UserService
   ) { }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   getUsers(): Promise<User[]> {
     return this.userService.getUsers();
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get(":id")
+  getUserById(@Param("id") id: number): Promise<User> {
+    return this.userService.getUserById(id);
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
   @Post()
   createUser(@Body() userDTO: CreateUserDTO): Promise<User> {
     return this.userService.createUser(userDTO);
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Patch(":id")
-  updateUser(@Param("id") id: number, @Body() userDTO: Partial<UpdateUserDTO>): Promise<User> {
+  updateUserById(@Param("id") id: number, @Body() userDTO: Partial<UpdateUserDTO>): Promise<User> {
     return this.userService.updateUserById(id, userDTO);
   }
 
-  @Patch(":id")
-  replaceUser(@Param("id") id: number, @Body() userDTO: Partial<ReplaceUserDTO>): Promise<User> {
-    return this.userService.updateUserById(id, userDTO);
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Put(":id")
+  replaceUserById(@Param("id") id: number, @Body() userDTO: ReplaceUserDTO): Promise<User> {
+    return this.userService.replaceUserById(id, userDTO);
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Delete(":id")
-  deleteUser(@Param("id", ParseIntPipe) id: number): Promise<User> {
+  deleteUserById(@Param("id", ParseIntPipe) id: number): Promise<User> {
     return this.userService.deleteUserById(id);
   }
 }

@@ -1,4 +1,6 @@
 import { Entity, BaseEntity, PrimaryColumn, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Exclude } from 'class-transformer';
+import * as _ from 'lodash';
 
 @Entity()
 export class User extends BaseEntity {
@@ -11,6 +13,7 @@ export class User extends BaseEntity {
   })
   email: string;
 
+  @Exclude()
   @Column({
     name: "password",
     nullable: false
@@ -22,4 +25,9 @@ export class User extends BaseEntity {
     nullable: false
   })
   fullName: string;
+
+  constructor(partial: Partial<User>) {
+    super();
+    _.assign(this, partial);
+  }
 }
