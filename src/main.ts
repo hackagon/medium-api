@@ -18,6 +18,7 @@ async function bootstrap() {
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
+  console.log(`App is running on port ${5000}`)
   await app.listen(5000);
 }
 bootstrap();

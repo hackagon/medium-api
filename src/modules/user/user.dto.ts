@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, Validate } from "class-validator";
+import { IsEmail, IsNotEmpty, Validate, IsEmpty } from "class-validator";
 import { IsMatch } from "../../decorator/isMatch.decorator";
 import { IsUniqueEmail } from "../../decorator/isUnique.decorator";
 
@@ -21,11 +21,23 @@ export class CreateUserDTO {
 
 // Update
 export class UpdateUserDTO {
+  @IsEmpty()
+  email: string;
+
+  @IsEmpty()
+  password: string;
+
   fullName: string;
 }
 
 // Replace
 export class ReplaceUserDTO {
+  @IsEmpty()
+  email: string;
+
+  @IsEmpty()
+  password: string;
+
   @IsNotEmpty()
   fullName: string;
 }
