@@ -43,6 +43,7 @@ export class UserService {
     let foundUser = await this.getUserById(id);
     _.chain(userDTO)
       .keys()
+      .value()
       .forEach(attr => foundUser[attr] = userDTO[attr])
 
     await foundUser.save();

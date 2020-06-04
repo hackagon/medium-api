@@ -1,6 +1,6 @@
 // import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
 import { InjectRepository, InjectEntityManager } from '@nestjs/typeorm';
-import { UserRepository } from 'src/modules/user/user.repository';
+import { UserRepository } from '../modules/user/user.repository';
 // import { Repository, EntityManager } from 'typeorm';
 // import { Injectable } from '@nestjs/common';
 
