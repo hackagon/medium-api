@@ -12,11 +12,15 @@ export class CreateUserDTO {
   @IsNotEmpty()
   password: string;
 
+  @IsNotEmpty()
   @IsMatch("password", { message: "Confirm password should match" })
   password2: string;
 
   @IsNotEmpty()
   fullName: string;
+
+  @IsEmpty()
+  createdAt: Date;
 }
 
 // Update
@@ -28,6 +32,9 @@ export class UpdateUserDTO {
   password: string;
 
   fullName: string;
+
+  @IsEmpty()
+  createdAt: Date;
 }
 
 // Replace
@@ -40,4 +47,7 @@ export class ReplaceUserDTO {
 
   @IsNotEmpty()
   fullName: string;
+
+  @IsEmpty()
+  createdAt: Date;
 }

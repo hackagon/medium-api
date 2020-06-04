@@ -26,6 +26,12 @@ export class User extends BaseEntity {
   })
   fullName: string;
 
+  @Column({
+    default: () => "NOW()",
+    name: "created_at"
+  })
+  createdAt: Date
+
   constructor(partial: Partial<User>) {
     super();
     _.assign(this, partial);

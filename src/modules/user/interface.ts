@@ -1,6 +1,5 @@
 import { CreateUserDTO } from "./user.dto";
 
-
 // interface
 export interface User extends CreateUserDTO {
   id: number;
@@ -8,7 +7,6 @@ export interface User extends CreateUserDTO {
   password: string;
   fullName: string;
 }
-
 
 export interface Credentials {
   email: string;
