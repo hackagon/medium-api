@@ -1,4 +1,4 @@
-import { Entity, BaseEntity, PrimaryColumn, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, BaseEntity, PrimaryColumn, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn } from "typeorm";
 import { Exclude } from 'class-transformer';
 import * as _ from 'lodash';
 
@@ -26,11 +26,15 @@ export class User extends BaseEntity {
   })
   fullName: string;
 
-  @Column({
-    default: () => "NOW()",
+  @CreateDateColumn({
     name: "created_at"
   })
   createdAt: Date
+
+  @UpdateDateColumn({
+    name: "updated_at"
+  })
+  public updatedAt: number;
 
   constructor(partial: Partial<User>) {
     super();

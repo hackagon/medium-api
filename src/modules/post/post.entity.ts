@@ -1,4 +1,4 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, BeforeUpdate, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Post extends BaseEntity {
@@ -30,4 +30,16 @@ export class Post extends BaseEntity {
     name: "created_at"
   })
   createdAt: Date
+
+  @UpdateDateColumn({
+    name: "updated_at",
+    nullable: true
+  })
+  public updatedAt: number;
+
+  @BeforeUpdate()
+  public setUpdatedAt() {
+    console.log(Date.now())
+    this.updatedAt = Math.floor(Date.now() / 1000);
+  }
 }
