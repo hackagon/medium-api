@@ -56,4 +56,21 @@ export class UserService {
     await this.userRepository.delete(id);
     return foundUser;
   }
+
+  /**
+   * query related posts
+   */
+  async getUserByIdIncludingStories(id: number): Promise<any> {
+    return await this.userRepository.findOne({
+      where: {
+        id
+      },
+      join: {
+        alias: "user",
+        leftJoinAndSelect: {
+          stories: "user.stories"
+        }
+      }
+    })
+  }
 }

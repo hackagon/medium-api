@@ -44,4 +44,10 @@ export class UserController {
   deleteUserById(@Param("id", ParseIntPipe) id: number): Promise<User> {
     return this.userService.deleteUserById(id);
   }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get("/:id/stories")
+  getUserByIdIncludingStories(@Param("id") id: number): Promise<User> {
+    return this.userService.getUserByIdIncludingStories(id);
+  }
 }

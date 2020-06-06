@@ -38,7 +38,9 @@ export class User extends BaseEntity {
   public updatedAt: number;
 
   // relation
-  @OneToMany(type => Story, story => story.user)
+  @OneToMany(type => Story, story => story.userId, {
+    cascade: ["insert", "update", "remove"],
+  })
   stories: Story[]
 
   constructor(partial: Partial<User>) {

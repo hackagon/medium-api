@@ -1,4 +1,4 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, BeforeUpdate, UpdateDateColumn, ManyToOne, BeforeInsert } from 'typeorm';
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, BeforeUpdate, UpdateDateColumn, ManyToOne, BeforeInsert, JoinColumn } from 'typeorm';
 import * as _ from "lodash";
 import { User } from '../user/user.entity';
 import { StoryStatus } from './story.interface';
@@ -14,7 +14,8 @@ export class Story extends BaseEntity {
   })
   title: string;
 
-  @Column({
+  @ManyToOne(type => User, user => user.stories)
+  @JoinColumn({
     name: "user_id"
   })
   userId: number;
@@ -46,8 +47,8 @@ export class Story extends BaseEntity {
   public updatedAt: number;
 
   // relation
-  @ManyToOne(type => User, user => user.stories)
-  user: User;
+  // @ManyToOne(type => User, user => user.stories)
+  // user: User;
 
   // hook
   @BeforeInsert()
