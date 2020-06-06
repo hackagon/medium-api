@@ -2,7 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from "@nestjs/typeorm";
 import { StoryRepository } from './story.repository';
 import { Story } from "./story.entity";
-import { CreateStoryDTO } from './story.dto';
+import { CreateStoryDTO, ReplaceStoryDTO } from './story.dto';
+import * as _ from "lodash";
 
 @Injectable()
 export class StoryService {
@@ -24,5 +25,17 @@ export class StoryService {
   async createStory(storyDTO: CreateStoryDTO): Promise<Story> {
     const newStory = this.storyRepository.create(storyDTO);
     return await newStory.save()
+  }
+
+  async replaceStoryById(id: number, storyDTO: ReplaceStoryDTO): Promise<Story> {
+    const foundStory = await this.getStoryById(id);
+
+    _.chain(storyDTO)
+      .keys()
+      .value()
+      .forEach(attr => foundStory[attr] = storyDTO[attr])
+
+    await foundStory.save();
+    return foundStory;
   }
 }
