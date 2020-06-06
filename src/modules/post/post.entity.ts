@@ -1,4 +1,7 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, BeforeUpdate, UpdateDateColumn } from 'typeorm';
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, BeforeUpdate, UpdateDateColumn, ManyToOne } from 'typeorm';
+import * as _ from "lodash";
+import { User } from '../user/user.entity';
+import { PostStatus } from './post.interface';
 
 @Entity()
 export class Post extends BaseEntity {
@@ -21,25 +24,28 @@ export class Post extends BaseEntity {
   imageUrl: string;
 
   @Column({
-    name: "status"
+    name: "status",
+    default: PostStatus.DRAFT
   })
-  status: string;
+  status: PostStatus;
 
-  @Column({
-    default: () => "NOW()",
+
+  @CreateDateColumn({
     name: "created_at"
   })
   createdAt: Date
 
   @UpdateDateColumn({
-    name: "updated_at",
-    nullable: true
+    name: "updated_at"
   })
   public updatedAt: number;
 
-  @BeforeUpdate()
-  public setUpdatedAt() {
-    console.log(Date.now())
-    this.updatedAt = Math.floor(Date.now() / 1000);
+  // relation
+  @ManyToOne(type => User, user => user.posts)
+  user: User;
+
+  constructor(partial: Partial<Post>) {
+    super();
+    _.assign(this, partial);
   }
 }
