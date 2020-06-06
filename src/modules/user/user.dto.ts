@@ -1,6 +1,6 @@
 import { IsEmail, IsNotEmpty, Validate, IsEmpty } from "class-validator";
-import { IsMatch } from "../../decorator/isMatch.decorator";
-import { IsUniqueEmail } from "../../decorator/isUnique.decorator";
+import { IsMatch } from "../../decorators/isMatch.decorator";
+import { IsUniqueEmail } from "../../decorators/isUnique.decorator";
 
 // Create
 export class CreateUserDTO {

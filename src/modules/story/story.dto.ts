@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsEmpty } from "class-validator";
 
 // Create
-export class CreatePostDTO {
+export class CreateStoryDTO {
   @IsNotEmpty()
   userId: number;
 
@@ -12,7 +12,7 @@ export class CreatePostDTO {
 }
 
 // Update
-export class UpdatePostDTO {
+export class UpdateStoryDTO {
   @IsNotEmpty()
   name: string;
 
@@ -20,7 +20,7 @@ export class UpdatePostDTO {
 }
 
 // Replace
-export class ReplacePostDTO {
+export class ReplaceStoryDTO {
   @IsNotEmpty()
   name: string;
 

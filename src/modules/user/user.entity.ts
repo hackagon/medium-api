@@ -1,7 +1,7 @@
 import { Entity, BaseEntity, PrimaryColumn, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn, OneToMany } from "typeorm";
 import { Exclude } from 'class-transformer';
 import * as _ from 'lodash';
-import { Post } from '../post/post.entity';
+import { Story } from '../story/story.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -38,8 +38,8 @@ export class User extends BaseEntity {
   public updatedAt: number;
 
   // relation
-  @OneToMany(type => Post, post => post.user)
-  posts: Post[]
+  @OneToMany(type => Story, story => story.user)
+  stories: Story[]
 
   constructor(partial: Partial<User>) {
     super();

@@ -1,4 +1,4 @@
-export enum PostStatus {
+export enum StoryStatus {
   DRAFT = "DRAFT",
   PUBLISHED = "PUBLISHED",
   MODIFIED = "MODIFIED"

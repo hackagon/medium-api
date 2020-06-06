@@ -11,4 +11,4 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [],
   providers: []
 })
-export class PostModule { }
+export class StoryModule { }
