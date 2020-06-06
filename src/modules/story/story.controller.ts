@@ -3,7 +3,7 @@ import { StoryService } from './story.service';
 import { CreateStoryDTO } from './story.dto';
 import { Story } from './story.entity';
 
-@Controller('/stories')
+@Controller('stories')
 export class StoryController {
   constructor(
     private storyService: StoryService

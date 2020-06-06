@@ -2,7 +2,7 @@ import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, B
 import * as _ from "lodash";
 import { User } from '../user/user.entity';
 import { StoryStatus } from './story.interface';
-import { cleanAccents } from "../../utils/handleVietnamese";
+import { cleanAccents } from "../../utils/handleString";
 
 @Entity()
 export class Story extends BaseEntity {
@@ -10,9 +10,9 @@ export class Story extends BaseEntity {
   id: number;
 
   @Column({
-    name: "name"
+    name: "title"
   })
-  name: string;
+  title: string;
 
   @Column({
     name: "user_id"
@@ -53,7 +53,13 @@ export class Story extends BaseEntity {
   @BeforeInsert()
   @BeforeUpdate()
   generateSlugFromName() {
-    this.slug = cleanAccents(this.name) + Date.now()
+    this.slug = _.chain(this.title)
+      .thru(cleanAccents)
+      .toLower()
+      .split(" ")
+      .concat(Date.now().toString())
+      .join("-")
+      .value()
   }
 
   constructor(partial: Partial<Story>) {

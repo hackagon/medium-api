@@ -6,7 +6,7 @@ export class CreateStoryDTO {
   userId: number;
 
   @IsNotEmpty()
-  name: string;
+  title: string;
 
   imageUrl: string;
 }
@@ -14,7 +14,7 @@ export class CreateStoryDTO {
 // Update
 export class UpdateStoryDTO {
   @IsNotEmpty()
-  name: string;
+  title: string;
 
   imageUrl: string;
 }
@@ -22,7 +22,7 @@ export class UpdateStoryDTO {
 // Replace
 export class ReplaceStoryDTO {
   @IsNotEmpty()
-  name: string;
+  title: string;
 
   imageUrl: string;
 }
