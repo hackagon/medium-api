@@ -33,7 +33,7 @@ export class UserService {
   async updateUserById(id: number, userDTO: Partial<UpdateUserDTO>): Promise<User> {
     let foundUser = await this.getUserById(id);
 
-    foundUser = Object.assign(foundUser, userDTO, {})
+    foundUser = _.assign(foundUser, userDTO, {})
     await foundUser.save();
 
     return foundUser;
