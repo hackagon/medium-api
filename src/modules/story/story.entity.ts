@@ -44,11 +44,7 @@ export class Story extends BaseEntity {
   @UpdateDateColumn({
     name: "updated_at"
   })
-  public updatedAt: number;
-
-  // relation
-  // @ManyToOne(type => User, user => user.stories)
-  // user: User;
+  updatedAt: Date;
 
   // hook
   @BeforeInsert()

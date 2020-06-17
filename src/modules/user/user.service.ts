@@ -12,6 +12,8 @@ export class UserService {
   ) { }
 
   async getUsers(): Promise<User[]> {
+    const res = await this.userRepository.findStories();
+    console.log(res)
     return await this.userRepository.find();
   }
 

@@ -4,6 +4,7 @@ import { StoryRepository } from './story.repository';
 import { Story } from "./story.entity";
 import { CreateStoryDTO, ReplaceStoryDTO, UpdateStoryDTO } from './story.dto';
 import * as _ from "lodash";
+import { getConnection } from 'typeorm';
 
 @Injectable()
 export class StoryService {
