@@ -1,11 +1,12 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, AbstractHttpAdapter } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe, BadRequestException, UnprocessableEntityException, ArgumentMetadata } from "@nestjs/common";
+import { ValidationPipe, BadRequestException } from "@nestjs/common";
 import { ValidationError, useContainer } from 'class-validator';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix("/api");
+
   app.useGlobalPipes(
     new ValidationPipe({
       exceptionFactory: (validationErrors: ValidationError[] = []) => {
