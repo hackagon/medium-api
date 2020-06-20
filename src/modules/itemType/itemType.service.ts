@@ -30,8 +30,6 @@ export class ItemTypeService implements OnModuleInit {
       .value()
 
     await BBPromise.map(queries, sqlQuery => getConnection().query(sqlQuery))
-      .then(res => console.log(res))
-      .catch(console.log)
   }
 
   async getItemTypes(): Promise<ItemType[]> {
