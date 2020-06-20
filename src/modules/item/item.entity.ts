@@ -2,14 +2,30 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, U
 
 @Entity()
 export class Item extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({
+    name: "id"
+  })
   id: number;
 
-  @Column()
+  @Column({
+    name: "post_id"
+  })
+  postId: number;
+
+  @Column({
+    name: "item_type_id"
+  })
   itemTypeId: number;
 
-  @Column()
+  @Column({
+    name: "content"
+  })
   content: string;
+
+  @Column({
+    name: "display_index"
+  })
+  displayIndex: number;
 
   @CreateDateColumn({
     name: "created_at"
