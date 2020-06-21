@@ -1,8 +1,9 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, BeforeUpdate, UpdateDateColumn, ManyToOne, BeforeInsert, JoinColumn } from 'typeorm';
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, BeforeUpdate, UpdateDateColumn, ManyToOne, BeforeInsert, JoinColumn, OneToMany } from 'typeorm';
 import * as _ from "lodash";
 import { User } from '../user/user.entity';
 import { StoryStatus } from './story.interface';
 import { cleanAccents } from "../../utils/handleString";
+import { Item } from '../item/item.entity';
 
 @Entity()
 export class Story extends BaseEntity {
@@ -58,6 +59,12 @@ export class Story extends BaseEntity {
       .join("-")
       .value()
   }
+
+  // relation
+  @OneToMany(type => Item, item => item.storyId, {
+    cascade: ["insert", "update", "remove"]
+  })
+  items: Item[]
 
   constructor(partial: Partial<Story>) {
     super();

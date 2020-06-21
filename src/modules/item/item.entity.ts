@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
+import * as _ from "lodash";
+import { Story } from '../story/story.entity';
 
 @Entity()
 export class Item extends BaseEntity {
@@ -7,7 +9,8 @@ export class Item extends BaseEntity {
   })
   id: number;
 
-  @Column({
+  @ManyToOne(type => Story, story => story.items)
+  @JoinColumn({
     name: "story_id"
   })
   storyId: number;
@@ -36,4 +39,12 @@ export class Item extends BaseEntity {
     name: "updated_at"
   })
   updatedAt: Date;
+
+  // relation
+
+
+  constructor(partial: Partial<Item>) {
+    super();
+    _.assign(this, partial);
+  }
 }
