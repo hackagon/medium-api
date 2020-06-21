@@ -1,5 +1,5 @@
 export class CreateItemDTO {
-  storyId: number;
+  storyId?: number;
   itemTypeId: number;
   content: string;
 }

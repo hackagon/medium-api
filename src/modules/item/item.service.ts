@@ -11,7 +11,7 @@ export class ItemService {
     @InjectRepository(ItemRepository) private itemRepository: ItemRepository
   ) { }
 
-  async findItemById(id: number): Promise<Item> {
+  async getItemById(id: number): Promise<Item> {
     const foundItem = await this.itemRepository.findOne(id);
     if (!foundItem) throw new NotFoundException("Item not found")
 
@@ -25,10 +25,17 @@ export class ItemService {
   }
 
   async updateItemById(id: number, data: UpdateItemDTO): Promise<Item> {
-    let foundItem = await this.findItemById(id);
+    let foundItem = await this.getItemById(id);
     foundItem = _.assign(foundItem, data, {});
 
     await foundItem.save()
+    return foundItem;
+  }
+
+  async deleteItemById(id: number): Promise<Item> {
+    let foundItem = await this.getItemById(id);
+
+    await this.itemRepository.delete(id);
     return foundItem;
   }
 }
