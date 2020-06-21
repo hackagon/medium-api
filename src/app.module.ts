@@ -7,12 +7,14 @@ import { UserModule } from './modules/user/user.module';
 import { StoryModule } from './modules/story/story.module';
 import { ValidatorModule } from './decorators/validator.module';
 import { ItemTypeModule } from './modules/itemType/itemType.module';
+import { StoryItemModule } from './modules/story-item/story-item.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
     UserModule,
     StoryModule,
+    StoryItemModule,
     ItemTypeModule,
     ValidatorModule
   ],

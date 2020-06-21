@@ -10,7 +10,6 @@ import { ItemService } from '../item/item.service';
 export class StoryItemService {
   constructor(
     @InjectRepository(ItemRepository) private itemRepository: ItemRepository,
-    @InjectRepository(StoryRepository) private storyRepository: StoryRepository,
     private itemService: ItemService
   ) { }
 
