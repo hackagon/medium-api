@@ -7,7 +7,6 @@ export class UserRepository extends Repository<User>{
   async findStories() {
     const entityManager = getManager();
     const stories = await entityManager.find(Story)
-    console.log(stories)
     return stories
   }
 }

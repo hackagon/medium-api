@@ -8,9 +8,9 @@ export class Item extends BaseEntity {
   id: number;
 
   @Column({
-    name: "post_id"
+    name: "story_id"
   })
-  postId: number;
+  storyId: number;
 
   @Column({
     name: "item_type_id"
