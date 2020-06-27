@@ -2,6 +2,7 @@ import { Entity, BaseEntity, PrimaryColumn, PrimaryGeneratedColumn, Column, Upda
 import { Exclude } from 'class-transformer';
 import * as _ from 'lodash';
 import { Story } from '../story/story.entity';
+import { Series } from '../series/series.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -38,6 +39,11 @@ export class User extends BaseEntity {
   public updatedAt: number;
 
   // relation
+  @OneToMany(type => Series, series => series.userId, {
+    cascade: ["insert", "update", "remove"],
+  })
+  series: Series[]
+
   @OneToMany(type => Story, story => story.userId, {
     cascade: ["insert", "update", "remove"],
   })
