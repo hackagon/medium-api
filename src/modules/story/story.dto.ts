@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsEmpty } from "class-validator";
+import { IsNotEmpty, IsEmpty } from 'class-validator';
 
 // Create
 export class CreateStoryDTO {
