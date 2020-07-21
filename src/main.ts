@@ -1,12 +1,13 @@
-import { NestFactory, AbstractHttpAdapter } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe, BadRequestException } from "@nestjs/common";
+import { ValidationPipe, BadRequestException, INestApplication } from '@nestjs/common';
 import { ValidationError, useContainer } from 'class-validator';
+import * as datasource from "./config/datasource.config.json";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, {
+  const app: INestApplication = await NestFactory.create(AppModule, {
     logger: ["warn", "error"]
-  });
+  })
   app.setGlobalPrefix("/api");
 
   app.useGlobalPipes(
@@ -23,7 +24,11 @@ async function bootstrap() {
 
   const port = process.env.PORT || 5000
 
-  console.log(`====================== App is running on port ${port} ======================`)
-  await app.listen(port);
+  await app.listen(port, () => {
+    console.log(`====================== Server is running ======================`)
+    console.log(`Port: ${port}`)
+    console.log(`Environment: ${process.env.NODE_ENV}`)
+    console.log(`Database: ${datasource[process.env.NODE_ENV].host}`)
+  });
 }
 bootstrap();

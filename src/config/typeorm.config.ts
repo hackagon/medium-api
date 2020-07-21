@@ -1,12 +1,15 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
+import * as datasource from "./datasource.config.json"
+
+const { host, port, database, username, password } = datasource[process.env.NODE_ENV || "local"]
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: "mysql",
-  host: "afs-medium.cefv5ijogza1.us-east-2.rds.amazonaws.com" || "localhost",
-  port: 3306,
-  username: "admin" || "root",
-  password: "admin123" || "hackagon",
-  database: "medium",
+  host,
+  port,
+  username,
+  password,
+  database,
   entities: [__dirname + "/../**/*.entity.{js,ts}"],
   synchronize: true
 }
