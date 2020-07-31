@@ -21,6 +21,9 @@ export class UpdateStoryDTO {
 
 // Replace
 export class ReplaceStoryDTO {
+  @IsEmpty()
+  userId: number;
+
   @IsNotEmpty()
   title: string;
 

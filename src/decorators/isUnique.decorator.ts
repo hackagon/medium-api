@@ -1,7 +1,11 @@
-import { InjectRepository, InjectEntityManager } from '@nestjs/typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from '../modules/user/user.repository';
 
-import { registerDecorator, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from "class-validator";
+import {
+  ValidatorConstraint,
+  ValidatorConstraintInterface,
+  ValidationArguments,
+} from 'class-validator';
 import { Injectable } from '@nestjs/common';
 
 @ValidatorConstraint({ async: true })
@@ -9,7 +13,7 @@ import { Injectable } from '@nestjs/common';
 export class IsUniqueEmail implements ValidatorConstraintInterface {
   constructor(
     @InjectRepository(UserRepository) private userRepository: UserRepository,
-  ) { }
+  ) {}
   async validate(email: any, args: ValidationArguments) {
     return this.userRepository.findOne({ email }).then(user => {
       if (user) return false;
